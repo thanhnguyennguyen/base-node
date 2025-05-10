@@ -52,8 +52,11 @@ exec $BINARY node \
   --authrpc.port="$AUTHRPC_PORT" \
   --authrpc.jwtsecret="$OP_NODE_L2_ENGINE_AUTH" \
   --metrics=0.0.0.0:"$METRICS_PORT" \
-  --max-outbound-peers=100 \
+  --max-outbound-peers=${RETH_MAX_PEERS:-100} \
   --chain "$RETH_CHAIN" \
   --rollup.sequencer-http=$RETH_SEQUENCER_HTTP \
   --rollup.disable-tx-pool-gossip \
+  ${PRUNE_MODE:+--prune=$PRUNE_MODE} \
+  ${RETH_SYNC_WORKERS:+--sync.workers=$RETH_SYNC_WORKERS} \
+  ${RETH_CACHE_SIZE:+--cache.size=$RETH_CACHE_SIZE} \
   $ADDITIONAL_ARGS

@@ -14,6 +14,10 @@ services:
       - ${HOST_DATA_DIR}:/data
     environment:
       - NODE_TYPE=${NODE_TYPE:-vanilla}
+      - PRUNE_MODE=false  # Enable archive mode
+      - RETH_SYNC_WORKERS=16  # Optimize for 32 CPU cores
+      - RETH_MAX_PEERS=100    # Maximum number of peers
+      - RETH_CACHE_SIZE=8192  # Cache size in MB (8GB)
     env_file:
       - ${NETWORK_ENV:-.env.mainnet} # Use .env.mainnet by default, override with .env.sepolia for testnet
   node:
